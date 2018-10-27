@@ -51,8 +51,6 @@ export default {
   },
   mounted () {
     this.now = this.$moment()
-    console.log(this.$http.get('http://yr.no/stad/Noreg/Telemark/Sauherad/Gvarv/varsel.xml'))
-    console.log('asd')
   }
 }
 </script>
