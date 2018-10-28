@@ -1,7 +1,22 @@
 <template>
   <div class="search">
-    <input class="search-input" v-model="input">
-    <button class="submit-button" @click="find"></button>
+    <h1 class="title">SØK</h1>
+    <el-input class="search-input" placeholder="" v-model="input"></el-input>
+    <div class="date-container">
+      <el-date-picker
+        v-model="from"
+        class="date-picker"
+        type="date"
+        placeholder="Fra">
+      </el-date-picker>
+      <el-date-picker
+        v-model="to"
+        class="date-picker"
+        type="date"
+        placeholder="Til">
+      </el-date-picker>
+    </div>
+    <el-button class="submit-button" @click="find">Søk</el-button>
   </div>
 </template>
 
@@ -16,14 +31,15 @@ export default {
       lat: 0,
       lon: 0,
       now: null,
-      tide: null
+      tide: null,
+      from: null,
+      to: null
     }
   },
   methods: {
     find () {
-      this.now = this.$moment()
-      let from = this.now.format('YYYY-MM-DD')
-      let to = this.now.add(1, 'days').format('YYYY-MM-DD')
+      let from = this.$moment(this.from).format('YYYY-MM-DD')
+      let to = this.$moment(this.to).format('YYYY-MM-DD')
       this.$http.get('https://maps.googleapis.com/maps/api/geocode/json?address=Geiranger,+CA&key=AIzaSyDpURb79tdvjDP5GEdlhBKJFXD6a3qWMRc').then((res) => {
         this.lat = res.data.results[0].geometry.location.lat
         this.lon = res.data.results[0].geometry.location.lng
@@ -43,17 +59,44 @@ export default {
 </script>
 <style scoped lang="scss">
 .search {
-  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  background-color: #e5ecf4;
+  height: 100%;
+  .title {
+    margin-top: 20vh;
+    color: #2f3543;
+    font-size: 36px;
+  }
   .search-input {
-    width: 80%;
-    float: left;
-    height: 26px;
-    border-radius: 5px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    flex: 1;
   }
   .submit-button {
-    width: 17%;
-    height: 32px;
-    border-radius: 5px;
+    max-width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    flex: 1;
+    max-height: 50px;
+    margin-bottom: 200px;
+  }
+  .date-container {
+    flex: 1;
+    display: flex;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    .date-picker {
+      display: block;
+      width: 50%;
+      flex: 1;
+      margin: 0 5px 0 5px;
+    }
   }
 }
 </style>

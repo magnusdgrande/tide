@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <search></search>
+    <search v-if="showSearch"></search>
     <span class="location-name">{{locationName}}</span>
     <div class="low-high-container">
       <div class="high" v-if="high">
@@ -41,6 +41,9 @@ export default {
     },
     low () {
       return this.$store.getters.getLow()
+    },
+    showSearch () {
+      return this.$store.getters.getSearch()
     }
   },
   data () {
@@ -56,6 +59,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .home {
+  height: 100%;
   .location-name {
     font-size: 38px;
   }

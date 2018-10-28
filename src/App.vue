@@ -11,6 +11,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: 100%;
 }
 #nav {
   padding: 30px;
@@ -23,6 +24,12 @@
   }
 }
 body {
-  background-color: #f1f1f1;
+  background-color: #2f3543;
+  color: white;
+  height: 100%;
+  margin: 0;
+}
+html {
+  height: 100%;
 }
 </style>

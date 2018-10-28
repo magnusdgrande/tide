@@ -10,7 +10,8 @@ export default new Vuex.Store({
     locationName: null,
     sun: null,
     high: null,
-    low: null
+    low: null,
+    showSearch: true
   },
   getters: {
     getWeather: (state) => () => {
@@ -30,6 +31,9 @@ export default new Vuex.Store({
     },
     getLow: (state) => () => {
       return state.low
+    },
+    getSearch: (state) => () => {
+      return state.showSearch
     }
   },
   mutations: {
@@ -61,6 +65,7 @@ export default new Vuex.Store({
       })
       state.high = high
       state.low = low
+      state.showSearch = false
     },
   },
   actions: {
